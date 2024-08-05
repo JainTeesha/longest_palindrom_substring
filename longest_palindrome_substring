@@ -1,0 +1,39 @@
+public class longest_palindrome_substr {
+    public static void main(String[] args) {
+        String str = "nitin";
+        String longestPalindromicSubstring = findLongestPalindromeSubstring(str);
+        System.out.println("Longest Palindromic Substring: " + longestPalindromicSubstring);
+    }
+
+    private static String findLongestPalindromeSubstring(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+
+        String longestPalindrome = "";
+
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j <= s.length(); j++) {
+                String sub = s.substring(i, j);
+                if (isPalindrome(sub) && sub.length() > longestPalindrome.length()) {
+                    longestPalindrome = sub;
+                }
+            }
+        }
+
+        return longestPalindrome;
+    }
+
+    private static boolean isPalindrome(String sub) {
+        int left = 0;
+        int right = sub.length() - 1;
+        while (left < right) {
+            if (sub.charAt(left) != sub.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
